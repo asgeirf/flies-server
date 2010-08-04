@@ -57,4 +57,5 @@ public class ContainerTest {
 		assertThat(session, notNullValue());
 		assertThat(session.createQuery("from User").list().size(), is(0));
 	}
+	
 }
