@@ -42,7 +42,7 @@ public class ContainerTest {
 				.addResource("jetty-env.xml", ArchivePaths.create("WEB-INF/jetty-env.xml"))
             .addClass(User.class)
 				.addResource(new FileAsset(new File("src/main/webapp/META-INF/context.xml")), ArchivePaths.create("META-INF/context.xml"))
-				.setWebXML(new File("src/main/webapp/WEB-INF/web.xml"));
+				.setWebXML("web-tomcat-embedded.xml");
 		
 	}
 

@@ -23,7 +23,7 @@
 		<hibernate.version>3.5.4-Final</hibernate.version>
 		<hibernate.search.version>3.2.1.Final</hibernate.search.version>
 		<hibernate.validator.version>4.1.0.Final</hibernate.validator.version>
-		<arquillian.version>1.0.0-SNAPSHOT</arquillian.version>
+		<arquillian.version>1.0.0.Alpha3</arquillian.version>
 	</properties>
 
 	<build>
