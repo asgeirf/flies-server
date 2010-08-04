@@ -41,7 +41,7 @@
 		<param-name>resteasy.injector.factory</param-name>
 		<param-value>org.jboss.resteasy.cdi.CdiInjectorFactory</param-value>
 	</context-param>
-
+<!-- 
    <servlet>
       <servlet-name>ServletTestRunner</servlet-name>
       <servlet-class>org.jboss.arquillian.protocol.servlet_3.ServletTestRunner</servlet-class>
@@ -51,5 +51,5 @@
       <servlet-name>ServletTestRunner</servlet-name>
       <url-pattern>/ArquillianServletRunner</url-pattern>
    </servlet-mapping>
-
+ -->
 </web-app>

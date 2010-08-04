@@ -40,7 +40,7 @@ public class ContainerTest {
 				.addClass(FliesRestApplication.class)
 				.addClass(QueryResource.class)
 				.addResource("jetty-env.xml", ArchivePaths.create("WEB-INF/jetty-env.xml"))
-				.addClass(User.class)
+            .addClass(User.class)
 				.addResource(new FileAsset(new File("src/main/webapp/META-INF/context.xml")), ArchivePaths.create("META-INF/context.xml"))
 				.setWebXML(new File("src/main/webapp/WEB-INF/web.xml"));
 		

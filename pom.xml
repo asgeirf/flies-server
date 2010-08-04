@@ -11,65 +11,56 @@
 	<name>Flies Server</name>
 
 	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+		<!-- version -->
+		<weld.bom.version>1.0.1-SP4</weld.bom.version>
 		<weld.version>1.0.1-Final</weld.version>
-		<cdi.version>1.0-SP1</cdi.version>
-		<weld.logging.version>1.0.0-CR1-SP1</weld.logging.version>
 		<weld.logger.version>1.0.0-CR2</weld.logger.version>
+		<weld.logging.version>1.0.0-CR1-SP1</weld.logging.version>
 		<seam.version>3.0.0-SNAPSHOT</seam.version>
 		<resteasy.version>2.0.0.GA</resteasy.version>
-		<jackson.version>1.5.0</jackson.version>
-		<jetty.version>6.1.12</jetty.version>
-		<hibernate.version>3.5.1-Final</hibernate.version>
-		<hibernate.search.version>3.2.0.CR1</hibernate.search.version>
-		<arquillian.version>1.0.0.Alpha3</arquillian.version>
+		<hibernate.version>3.5.4-Final</hibernate.version>
+		<hibernate.search.version>3.2.1.Final</hibernate.search.version>
+		<hibernate.validator.version>4.1.0.Final</hibernate.validator.version>
+		<arquillian.version>1.0.0-SNAPSHOT</arquillian.version>
 	</properties>
 
+	<build>
+		<finalName>flies</finalName>
+
+		<plugins>
+			<plugin>
+				<artifactId>maven-compiler-plugin</artifactId>
+				<configuration>
+					<encoding>UTF-8</encoding>
+					<source>1.6</source>
+					<target>1.6</target>
+					<showDeprecation>true</showDeprecation>
+					<showWarnings>true</showWarnings>
+					<optimize>true</optimize>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-eclipse-plugin</artifactId>
+				<configuration>
+					<wtpversion>2.0</wtpversion>
+				</configuration>
+			</plugin>
+			<plugin>
+				<groupId>org.mortbay.jetty</groupId>
+				<artifactId>maven-jetty-plugin</artifactId>
+				<configuration>
+					<contextPath>${project.build.finalName}</contextPath>
+					<jettyEnvXml>${basedir}/src/main/resources/jetty-env.xml</jettyEnvXml>
+					<scanIntervalSeconds>3</scanIntervalSeconds>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
 	<profiles>
-
-		<profile>
-			<id>jetty6-embedded</id>
-			<dependencies>
-				<dependency>
-					<groupId>org.jboss.arquillian.container</groupId>
-					<artifactId>arquillian-jetty-embedded-6.1</artifactId>
-					<version>${arquillian.version}</version>
-					<scope>test</scope>
-				</dependency>
-				<dependency>
-					<groupId>org.mortbay.jetty</groupId>
-					<artifactId>jetty</artifactId>
-					<version>${jetty.version}</version>
-					<scope>test</scope>
-				</dependency>
-				<!-- plus and naming requires for using JNDI -->
-				<dependency>
-					<groupId>org.mortbay.jetty</groupId>
-					<artifactId>jetty-plus</artifactId>
-					<version>${jetty.version}</version>
-					<scope>test</scope>
-				</dependency>
-				<dependency>
-					<groupId>org.mortbay.jetty</groupId>
-					<artifactId>jetty-naming</artifactId>
-					<version>${jetty.version}</version>
-					<scope>test</scope>
-				</dependency>
-				<dependency>
-					<groupId>org.glassfish.web</groupId>
-					<artifactId>el-impl</artifactId>
-					<version>2.2</version>
-					<scope>test</scope>
-				</dependency>
-
-				<dependency>
-					<groupId>javax.servlet.jsp</groupId>
-					<artifactId>jsp-api</artifactId>
-					<version>2.2</version>
-					<scope>test</scope>
-				</dependency>
-
-			</dependencies>
-		</profile>
 
 		<profile>
 			<id>tomcat-embedded</id>
@@ -114,100 +105,20 @@
 			</dependencies>
 		</profile>
 
-		<profile>
-			<id>weld-se-embedded-1</id>
-			<dependencies>
-				<dependency>
-					<groupId>org.jboss.arquillian.container</groupId>
-					<artifactId>arquillian-weld-se-embedded-1</artifactId>
-					<version>${arquillian.version}</version>
-				</dependency>
-				<dependency>
-					<groupId>org.glassfish.web</groupId>
-					<artifactId>el-impl</artifactId>
-					<version>2.2</version>
-					<scope>test</scope>
-				</dependency>
-				<dependency>
-					<groupId>javax.servlet.jsp</groupId>
-					<artifactId>jsp-api</artifactId>
-					<version>2.2</version>
-					<scope>test</scope>
-				</dependency>
-			</dependencies>
-		</profile>
-		<profile>
-			<id>jetty7-embedded</id>
-			<dependencies>
-				<dependency>
-					<groupId>org.jboss.arquillian.container</groupId>
-					<artifactId>arquillian-jetty-embedded-7</artifactId>
-					<version>1.0.0.Alpha3</version>
-					<scope>test</scope>
-				</dependency>
-				<dependency>
-					<groupId>org.eclipse.jetty</groupId>
-					<artifactId>jetty-webapp</artifactId>
-					<version>7.0.2.v20100331</version>
-					<scope>test</scope>
-				</dependency>
-				<!-- plus and naming requires for using JNDI -->
-				<dependency>
-					<groupId>org.mortbay.jetty</groupId>
-					<artifactId>jetty-plus</artifactId>
-					<version>7.0.2.v20100331</version>
-					<scope>test</scope>
-				</dependency>
-				<!-- Weld servlet, EL and JSP required for testing CDI injections -->
-				<dependency>
-					<groupId>org.glassfish.web</groupId>
-					<artifactId>el-impl</artifactId>
-					<version>2.2</version>
-					<scope>test</scope>
-				</dependency>
-				<dependency>
-					<groupId>javax.servlet.jsp</groupId>
-					<artifactId>jsp-api</artifactId>
-					<version>2.2</version>
-					<scope>test</scope>
-				</dependency>
-			</dependencies>
-		</profile>
 	</profiles>
 
-	<build>
-		<finalName>flies</finalName>
 
-		<plugins>
-			<plugin>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<configuration>
-					<encoding>UTF-8</encoding>
-					<source>1.6</source>
-					<target>1.6</target>
-					<showDeprecation>true</showDeprecation>
-					<showWarnings>true</showWarnings>
-					<optimize>true</optimize>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-eclipse-plugin</artifactId>
-				<configuration>
-					<wtpversion>2.0</wtpversion>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.mortbay.jetty</groupId>
-				<artifactId>maven-jetty-plugin</artifactId>
-				<configuration>
-					<contextPath>${project.build.finalName}</contextPath>
-					<jettyEnvXml>${basedir}/src/main/resources/jetty-env.xml</jettyEnvXml>
-					<scanIntervalSeconds>3</scanIntervalSeconds>
-				</configuration>
-			</plugin>
-		</plugins>
-	</build>
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.jboss.weld</groupId>
+				<artifactId>weld-core-bom</artifactId>
+				<version>${weld.bom.version}</version>
+				<scope>import</scope>
+				<type>pom</type>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 
 	<dependencies>
 
@@ -218,37 +129,12 @@
 		</dependency>
 
 		<dependency>
-			<!-- Provided by weld-servlet -->
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-simple</artifactId>
-			<version>1.5.10</version>
-		</dependency>
-
-		<dependency>
-			<groupId>ch.qos.cal10n</groupId>
-			<artifactId>cal10n-api</artifactId>
-			<version>0.7.2</version>
-		</dependency>
-
-		<dependency>
 			<groupId>javax.enterprise</groupId>
 			<artifactId>cdi-api</artifactId>
-			<version>${cdi.version}</version>
 		</dependency>
 
 		<dependency>
-			<groupId>org.jboss.weld</groupId>
-			<artifactId>weld-api</artifactId>
-			<version>${cdi.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.jboss.weld</groupId>
-			<artifactId>weld-spi</artifactId>
-			<version>${cdi.version}</version>
-		</dependency>
-
-		<dependency>
+			<!-- Needed by weld-servlet-int -->
 			<groupId>org.jboss.weld</groupId>
 			<artifactId>weld-core</artifactId>
 			<version>${weld.version}</version>
@@ -267,9 +153,29 @@
 		</dependency>
 
 		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-log4j12</artifactId>
+			<version>1.5.8</version>
+		</dependency>
+
+		<dependency>
+			<!-- Needed by weld-servlet-int -->
+			<groupId>ch.qos.cal10n</groupId>
+			<artifactId>cal10n-api</artifactId>
+			<version>0.7.4</version>
+		</dependency>
+
+		<dependency>
 			<groupId>org.jboss.weld.servlet</groupId>
 			<artifactId>weld-servlet-int</artifactId>
 			<version>${weld.version}</version>
+			<exclusions>
+				<exclusion>
+					<!-- We're not using JSF -->
+					<groupId>javax.faces</groupId>
+					<artifactId>jsf-api</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
 
 		<dependency>
@@ -282,20 +188,6 @@
 			<groupId>org.jboss.seam</groupId>
 			<artifactId>seam-persistence</artifactId>
 			<version>${seam.version}</version>
-			<exclusions>
-				<exclusion>
-					<groupId>javax.persistence</groupId>
-					<artifactId>persistence-api</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>javax.transaction</groupId>
-					<artifactId>jta</artifactId>
-				</exclusion>
-				<exclusion>
-					<groupId>org.slf4j</groupId>
-					<artifactId>slf4j-jdk14</artifactId>
-				</exclusion>
-			</exclusions>
 		</dependency>
 
 		<dependency>
@@ -304,14 +196,9 @@
 			<version>${resteasy.version}</version>
 			<exclusions>
 				<exclusion>
-					<!-- Provided by weld-servlet -->
+					<!-- Exclude specific slf4j-implementation -->
 					<groupId>org.slf4j</groupId>
-					<artifactId>slf4j-api</artifactId>
-				</exclusion>
-				<exclusion>
-					<!-- Provided by weld-servlet -->
-					<groupId>org.slf4j</groupId>
-					<artifactId>jcl-over-slf4j</artifactId>
+					<artifactId>slf4j-simple</artifactId>
 				</exclusion>
 				<exclusion>
 					<!-- Only needed for the client framework -->
@@ -330,27 +217,6 @@
 			<groupId>org.jboss.resteasy</groupId>
 			<artifactId>resteasy-jackson-provider</artifactId>
 			<version>${resteasy.version}</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-core-asl</artifactId>
-			<version>${jackson.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-mapper-asl</artifactId>
-			<version>${jackson.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-jaxrs</artifactId>
-			<version>${jackson.version}</version>
-		</dependency>
-		<dependency>
-			<groupId>org.codehaus.jackson</groupId>
-			<artifactId>jackson-xc</artifactId>
-			<version>${jackson.version}</version>
 		</dependency>
 
 		<!-- Persistence -->
@@ -374,13 +240,7 @@
 		<dependency>
 			<groupId>org.hibernate</groupId>
 			<artifactId>hibernate-validator</artifactId>
-			<version>4.0.2.GA</version>
-		</dependency>
-
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-validator-legacy</artifactId>
-			<version>4.0.2.GA</version>
+			<version>${hibernate.validator.version}</version>
 		</dependency>
 
 		<!-- Other -->
@@ -404,12 +264,8 @@
 		</dependency>
 
 		<!-- okapi-lib-search would otherwise use lucene 3.0.0 -->
-		<dependency>
-			<groupId>org.apache.lucene</groupId>
-			<artifactId>lucene-core</artifactId>
-			<version>2.9.2</version>
-		</dependency>
-
+		<!-- <dependency> <groupId>org.apache.lucene</groupId> <artifactId>lucene-core</artifactId> 
+			<version>2.9.2</version> </dependency> -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
